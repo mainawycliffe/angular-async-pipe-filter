@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class FilterService {
 
   filterCountries(filter?: string): Observable<Country[]> {
     return of(countries).pipe(
+      delay(2000),
       map(c => {
         // if filter is empty return all countries
         if (!filter) {
@@ -24,12 +25,6 @@ export class FilterService {
             filteredCountries.push(country);
           }
         });
-
-        if (filteredCountries.length === 0) {
-          throw new Error(
-            'I could not find a country matching your filter criteria!'
-          );
-        }
 
         return filteredCountries;
       })

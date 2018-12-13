@@ -10,20 +10,25 @@
     </div>
     <div class="col-12 p-3">
       <div class="row">
-        <ng-container *ngIf="(filterResults$ | filter: filterField) | async as data; else error">
-          <div class="col-12">
+        <ng-container *ngIf="(filterResults$ | filter: filterField) | async as data; else loading">
+          <div class="col-12" *ngIf="dataLength(data); else error">
             <div class="list-unstyled row">
               <div *ngFor="let x of data; let i = index" class="list-item col-12 col-md-6 col-lg-4">
                 {{ i + 1 }} . {{ x.name | titlecase }}
               </div>
             </div>
           </div>
-        </ng-container>
-        <ng-template #error>
-          <div class="col-12">
-            <div class="alert alert-danger">
-              I could not find a country matching your filter criteria!
+          <ng-template #error>
+            <div class="col-12">
+              <div class="alert alert-danger">
+                I could not find a country matching your filter criteria!
+              </div>
             </div>
+          </ng-template>
+        </ng-container>
+        <ng-template #loading>
+          <div class="col-12 text-center">
+            Loading ...
           </div>
         </ng-template>
       </div>

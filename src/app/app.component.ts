@@ -13,4 +13,8 @@ export class AppComponent {
   public filterResults$: Observable<Country[]> = null;
 
   constructor() {}
+
+  dataLength(data: Country[]) {
+    return data.length > 0 ? true : false;
+  }
 }
