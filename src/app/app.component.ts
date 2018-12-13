@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Country, FilterService } from './filter.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-pipe-filter';
+  public filterField;
+
+  public filterResults$: Observable<Country[]> = null;
+
+  constructor() {}
 }
